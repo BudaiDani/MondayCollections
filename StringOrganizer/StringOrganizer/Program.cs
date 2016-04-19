@@ -12,32 +12,39 @@ namespace StringOrganizer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter a string: ");
-            string firstString = Console.ReadLine();
-            Console.WriteLine("Enter another string: ");
-            string secondString = Console.ReadLine();
-            Console.WriteLine("Enter another string: ");
-            string thirdString = Console.ReadLine();
+            ArrayList stringList = new ArrayList();
+            stringList.Add("one");
+            stringList.Add("two");
+            stringList.Add("three");
+            stringList.Add("four");
+            stringList.Add("five");
 
-            List<string> stringList = new List<string>();
-            stringList.Add(firstString);
-            stringList.Add(secondString);
-            stringList.Add(thirdString);
+            foreach (string item in OrganizeStrings(stringList))
+            {
+                Console.WriteLine(item);
+            }
 
-            Console.WriteLine("The ArrayList initially contains the following values:");
-            PrintValues(stringList);
+            Console.WriteLine();
 
-            stringList.Sort();
-            Console.WriteLine("After sorting:");
-            PrintValues(stringList);
+            foreach (string s in OrganizeStringsInGenericStorage(stringList))
+            {
+                Console.WriteLine(s);
+            }
+
             Console.ReadLine();
         }
 
-        public static void PrintValues(IEnumerable stringList)
+        static ArrayList OrganizeStrings(ArrayList arrayList)
         {
-            foreach (Object obj in stringList)
-                Console.WriteLine("   {0}", obj);
-            Console.WriteLine();
+            arrayList.Sort();
+            return arrayList;
+        }
+
+        static List<string> OrganizeStringsInGenericStorage(ArrayList arrayList)
+        {
+            List<string> myList = new List<string>(arrayList.Cast<string>().ToList());
+            myList.Sort();
+            return myList;
         }
     }
 }
